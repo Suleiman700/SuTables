@@ -1,0 +1,79 @@
+import SuTables from './libs/SuTables/SuTables.js';
+import Button from './libs/SuTables/elements/Button.js';
+
+const SuTablesIns = new SuTables('myTable');
+
+const tableHeaders = [
+    {
+        html: 'id',
+        order: 0,
+    },
+    {
+        html: 'Name',
+        order: 1,
+    },
+    {
+        html: 'Age',
+        order: 2,
+    },
+    {
+        html: 'Phone',
+        order: 3,
+    },
+    {
+        html: 'Address',
+        order: 4,
+    },
+    {
+        html: 'Options',
+        order: 5,
+    },
+]
+
+const testBtn = new Button()
+testBtn.innerHTML = 'Hello World'
+testBtn.callback = () => {
+    console.log('clicked')
+}
+
+const tableRows = [
+    {
+        order: 0,
+        customStyle: 'font-size: 16px;',
+        cells: [
+            {
+                html: '0',
+                order: 0,
+            },
+            {
+                html: 'Suleiman',
+                order: 1,
+            },
+            {
+                html: '26',
+                order: 2,
+            },
+            {
+                html: '052-870-5533',
+                order: 3,
+            },
+            {
+                html: 'Bueina-Nujedat',
+                order: 4,
+            },
+            {
+                classes: ['text-center'],
+                html: testBtn.build().outerHTML,
+                order: 4,
+            },
+        ]
+    },
+]
+
+
+
+
+SuTablesIns.setHeaders(tableHeaders)
+SuTablesIns.renderHeaders()
+SuTablesIns.setRows(tableRows)
+SuTablesIns.renderRows()
