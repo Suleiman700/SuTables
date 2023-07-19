@@ -59,6 +59,9 @@ export default class SuTables {
             throw new Error('Rows must be an array of objects.');
         }
 
+        // clear previous rows
+        this.#rows = []
+
         // Validate each row object and set default values if necessary
         _rows.forEach((rowData) => {
             const rowObj = {
@@ -157,7 +160,9 @@ export default class SuTables {
             // iterate on row cells and add them into row
             rowCells.forEach(rowCell => {
                 const td = document.createElement('td')
-                td.innerHTML = rowCell.html
+                // td.innerHTML = rowCell.html
+                td.append(rowCell.html)
+                // console.log(rowCell.html)
 
                 // Set cell classes
                 if (rowCell.classes) {

@@ -31,7 +31,8 @@ const tableHeaders = [
 ]
 
 const testBtn = new Button()
-testBtn.innerHTML = 'Hello World'
+testBtn.innerHTML = 'Hello <strong>World</strong>'
+testBtn.classes = ['btn', 'btn-success']
 testBtn.callback = () => {
     console.log('clicked')
 }
@@ -63,7 +64,7 @@ const tableRows = [
             },
             {
                 classes: ['text-center'],
-                html: testBtn.build().outerHTML,
+                html: testBtn.getElm(),
                 order: 4,
             },
         ]

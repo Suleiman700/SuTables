@@ -3,6 +3,7 @@ export default class Button {
 
     #settings = {
         innerHTML: '',
+        classes: [],
         callback: undefined,
     }
 
@@ -18,14 +19,22 @@ export default class Button {
         this.#settings.callback = _callback
     }
 
-    build() {
+    /**
+     * set classes
+     * @param _classes {array} E.g. ['text-success']
+     */
+    set classes(_classes) {
+        this.#settings.classes = _classes
+    }
+
+    getElm() {
         const button = document.createElement('button')
 
         button.innerHTML = this.#settings.innerHTML
+        button.classList = this.#settings.classes.join(' ')
 
         button.addEventListener('click', () => {
             this.#settings.callback()
-            console.log('clicked')
         })
 
         return button
