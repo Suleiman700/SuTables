@@ -34,6 +34,9 @@ const testBtn = new Button()
 testBtn.innerHTML = 'Hello <strong>World</strong>'
 testBtn.classes = ['btn', 'btn-success']
 testBtn.callback = () => {
+    tableRows[0]['cells'][0]['html'] = parseInt(tableRows[0]['cells'][0]['html']) + 1
+    SuTablesIns.setRows(tableRows)
+    SuTablesIns.renderRows()
     console.log('clicked')
 }
 
@@ -66,6 +69,12 @@ const tableRows = [
                 classes: ['text-center'],
                 html: testBtn.getElm(),
                 order: 4,
+                onClick: () => {
+                    // tableRows[0]['cells'][0]['html'] = parseInt(tableRows[0]['cells'][0]['html']) + 1
+                    // SuTablesIns.setRows(tableRows)
+                    // SuTablesIns.renderRows()
+                    // console.log('clicked')
+                }
             },
         ]
     },
