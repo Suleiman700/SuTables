@@ -180,8 +180,15 @@ export default class SuTables {
             // iterate on row cells and add them into row
             rowCells.forEach((rowCell, index) => {
                 const td = document.createElement('td')
-                // td.innerHTML = rowCell.html
-                td.append(rowCell.html)
+
+                if (typeof rowCell.html === 'object') {
+                    rowCell.html.forEach(html => {
+                        td.append(html)
+                    })
+                }
+                else {
+                    td.append(rowCell.html)
+                }
 
                 // set cell order attribute if enabled
                 if (this.#SETTINGS.USE_ORDER_ATTR.CELLS) td.dataset.suOrder = index

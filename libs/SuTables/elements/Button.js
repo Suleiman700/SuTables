@@ -7,9 +7,7 @@ export default class Button {
         callback: undefined,
     }
 
-    constructor(_settings) {
-
-    }
+    constructor(_settings) {}
 
     set innerHTML(_innerHTML) {
         this.#settings.innerHTML = _innerHTML
@@ -30,7 +28,7 @@ export default class Button {
     getElm() {
         const button = document.createElement('button')
 
-        button.innerHTML = this.#settings.innerHTML
+        button.innerText = this.#settings.innerHTML
         button.classList = this.#settings.classes.join(' ')
 
         button.addEventListener('click', () => {

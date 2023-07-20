@@ -60,9 +60,9 @@ SuTablesIns.renderHeaders()
 const tableRows = []
 persons.forEach(person => {
     // create table row
-    const firstRow = new Row()
-    firstRow.key = person.id
-    firstRow.customStyle = 'font-size: 16px;'
+    const row = new Row()
+    row.key = person.id
+    row.customStyle = 'font-size: 16px;'
 
     // create id cell
     const idCell = new Cell()
@@ -95,7 +95,7 @@ persons.forEach(person => {
     // create button
     const testBtn = new Button()
     testBtn.innerHTML = 'Get Name'
-    testBtn.classes = ['btn', 'btn-success']
+    testBtn.classes = ['btn', 'btn-success', 'btn-sm']
     testBtn.callback = () => {
         nameCell.html = 'New Name'
 
@@ -106,10 +106,11 @@ persons.forEach(person => {
     // create options cell
     const optionsCell = new Cell()
     optionsCell.key = 'options'
-    optionsCell.html = testBtn.getElm()
+    // optionsCell.html = testBtn.getElm()
+    optionsCell.html = [testBtn.getElm(), testBtn.getElm()]
 
     // set row cells
-    firstRow.cells = [
+    row.cells = [
         idCell.build(),
         nameCell.build(),
         ageCell.build(),
@@ -118,7 +119,7 @@ persons.forEach(person => {
         optionsCell.build(),
     ]
 
-    tableRows.push(firstRow.build())
+    tableRows.push(row.build())
 })
 
 // set and build table rows
