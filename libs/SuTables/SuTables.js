@@ -7,18 +7,29 @@ export default class SuTables {
             html: '',
             order: 0,
             onClick: undefined,
-            classes: [], // E.g. ['text-danger']
-            customStyle: '', // E.g. 'font-size: 24px;'
-            attrs: {
-                scope: 'col',
-            },
+            classes: [], // E.g. classes: ['text-danger']
+            customStyle: '', // E.g. customStyle: 'font-size: 24px;'
+            attrs: {}, // E.g. attrs: {scope: 'col'}
         },
         ROWS: {
+            key: '', // row key attribute E.g. <tr data-su-key="<key>"></tr>
             order: 0,
             classes: [], // E.g. ['text-danger']
             customStyle: '', // E.g. 'font-size: 24px;'
             attrs: {},
             cells: []
+        }
+    }
+
+    #SETTINGS = {
+        /*
+            Whenever to add data-su-order attribute to headers and rows
+            this can be useful when you want to target specific cell in headers or rows
+         */
+        USE_ORDER_ATTR: {
+            HEADERS: false, // E.g. <th data-su-order="<index>"></tr>
+            ROWS: false, // E.g. <tr data-su-order="<index>"></tr>
+            CELLS: false, // E.g. <td data-su-order="<index>"></tr>
         }
     }
 
@@ -90,9 +101,12 @@ export default class SuTables {
         this.#headers.sort((a, b) => a.order - b.order);
 
         // Add each header to the header row
-        this.#headers.forEach((header) => {
+        this.#headers.forEach((header, index) => {
             const th = document.createElement('th');
             th.innerHTML = header.html;
+
+            // set order attribute if enabled
+            if (this.#SETTINGS.USE_ORDER_ATTR.HEADERS) th.dataset.suOrder = index
 
             // Set classes
             header.classes.forEach(headClass => {
@@ -135,11 +149,11 @@ export default class SuTables {
 
         const tbody = document.createElement('tbody')
 
-        // Sort headers by order
+        // Sort rows by order
         this.#rows.sort((a, b) => a.order - b.order);
 
         // Add each header to the header row
-        this.#rows.forEach((rowData) => {
+        this.#rows.forEach((rowData, rowIndex) => {
             const rowCells = rowData.cells
 
             // Sort row cells by order
@@ -157,12 +171,23 @@ export default class SuTables {
             // set row custom styling
             tr.style = rowData.customStyle
 
+            // set row order attribute if enabled
+            if (this.#SETTINGS.USE_ORDER_ATTR.ROWS) tr.dataset.suOrder = rowIndex
+
+            // set row key attribute if found
+            if (rowData.key) tr.dataset.suKey = rowData.key
+
             // iterate on row cells and add them into row
-            rowCells.forEach(rowCell => {
+            rowCells.forEach((rowCell, index) => {
                 const td = document.createElement('td')
                 // td.innerHTML = rowCell.html
                 td.append(rowCell.html)
-                // console.log(rowCell.html)
+
+                // set cell order attribute if enabled
+                if (this.#SETTINGS.USE_ORDER_ATTR.CELLS) td.dataset.suOrder = index
+
+                // set cell key attribute if found
+                if (rowCell.key) td.dataset.suKey = rowCell.key
 
                 // Set cell classes
                 if (rowCell.classes) {
@@ -182,9 +207,9 @@ export default class SuTables {
                 td.style = rowCell.customStyle
 
                 // Add any other properties or event listeners if needed
-                if (typeof rowCell.onClick === 'function') {
+                if (typeof rowCell.clickCallback === 'function') {
                     td.addEventListener('click', () => {
-                        rowCell.onClick()
+                        rowCell.clickCallback()
                     })
                 }
 
