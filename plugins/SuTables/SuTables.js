@@ -175,7 +175,7 @@ export default class SuTables {
             if (this.#SETTINGS.USE_ORDER_ATTR.ROWS) tr.dataset.suOrder = rowIndex
 
             // set row key attribute if found
-            if (rowData.key) tr.dataset.suKey = rowData.key
+            if (rowData.key !== undefined) tr.dataset.suKey = rowData.key
 
             // iterate on row cells and add them into row
             rowCells.forEach((rowCell, index) => {
