@@ -3,6 +3,7 @@ export default class Cell {
     #keys = {
         key: undefined,
         html: undefined,
+        elements: undefined,
         order: undefined,
         classes: undefined,
         clickCallback : undefined
@@ -40,6 +41,22 @@ export default class Cell {
      */
     get html() {
         return this.#keys.html
+    }
+
+    /**
+     * set cell elements
+     * @param _value {array} E.g. button HTML element, paragraph HTML element
+     */
+    set elements(_value) {
+        this.#keys.elements = _value
+    }
+
+    /**
+     * get cell elements
+     * @return {string}
+     */
+    get elements() {
+        return this.#keys.elements
     }
 
     /**

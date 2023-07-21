@@ -62,7 +62,7 @@ persons.forEach(person => {
     // create table row
     const row = new Row()
     row.key = person.id
-    row.customStyle = 'font-size: 16px;'
+    row.customStyle = 'font-size: 16px; white-space: nowrap;'
 
     // create id cell
     const idCell = new Cell()
@@ -92,22 +92,29 @@ persons.forEach(person => {
     addressCell.key = 'address'
     addressCell.html = person.address
 
-    // create button
-    const testBtn = new Button()
-    testBtn.innerHTML = 'Get Name'
-    testBtn.classes = ['btn', 'btn-success', 'btn-sm']
-    testBtn.callback = () => {
+    // create change name button
+    const btnChangeName = new Button()
+    btnChangeName.innerHTML = 'Change Name'
+    btnChangeName.classes = ['btn', 'btn-success', 'btn-sm']
+    btnChangeName.callback = () => {
+        // change name cell
         nameCell.html = 'New Name'
-
         // render is required to apply new changes
         SuTablesIns.renderRows()
+    }
+
+    // create get name button
+    const btnGetName = new Button()
+    btnGetName.innerHTML = 'Get Name'
+    btnGetName.classes = ['btn', 'btn-success', 'btn-sm', 'mx-2']
+    btnGetName.callback = () => {
+        alert(nameCell.html)
     }
 
     // create options cell
     const optionsCell = new Cell()
     optionsCell.key = 'options'
-    // optionsCell.html = testBtn.getElm()
-    optionsCell.html = [testBtn.getElm(), testBtn.getElm()]
+    optionsCell.elements = [btnChangeName.getElm(), btnGetName.getElm()]
 
     // set row cells
     row.cells = [

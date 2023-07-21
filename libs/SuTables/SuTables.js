@@ -181,12 +181,15 @@ export default class SuTables {
             rowCells.forEach((rowCell, index) => {
                 const td = document.createElement('td')
 
-                if (typeof rowCell.html === 'object') {
-                    rowCell.html.forEach(html => {
-                        td.append(html)
+                // add elements to cell
+                if (rowCell.elements) {
+                    rowCell.elements.forEach(element => {
+                        td.appendChild(element)
                     })
                 }
-                else {
+
+                // add html to cell
+                if (typeof rowCell.html != 'undefined') {
                     td.append(rowCell.html)
                 }
 
@@ -228,5 +231,4 @@ export default class SuTables {
 
         tableElement.appendChild(tbody);
     }
-
 }
