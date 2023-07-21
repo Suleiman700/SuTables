@@ -1,4 +1,3 @@
-
 # SuTables
 
 ```text
@@ -8,6 +7,8 @@
 ```
 
 A modular JavaScript plugin to build tables with ease
+
+![image](https://github.com/Suleiman700/SuTables/assets/25286081/eb3ce85c-c29c-4fec-89fa-05e4392c4467)
 
 ---
 
